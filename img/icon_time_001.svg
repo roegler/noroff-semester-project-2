@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="112" height="107" viewBox="0 0 112 107">
+  <g id="Group_28" data-name="Group 28" transform="translate(-311 -124)">
+    <g id="Group_27" data-name="Group 27">
+      <g id="Rectangle_7" data-name="Rectangle 7" transform="translate(327 124)" fill="#fff" stroke="#000" stroke-width="3">
+        <rect width="80" height="80" rx="24" stroke="none"/>
+        <rect x="1.5" y="1.5" width="77" height="77" rx="22.5" fill="none"/>
+      </g>
+      <g id="Group_14" data-name="Group 14" transform="translate(349.253 146.253)">
+        <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(-0.253 -0.253)" fill="#fff" stroke="#000" stroke-width="4">
+          <circle cx="18" cy="18" r="18" stroke="none"/>
+          <circle cx="18" cy="18" r="16" fill="none"/>
+        </g>
+        <g id="Group_7" data-name="Group 7" transform="translate(18.383 6.773)">
+          <line id="Line_2" data-name="Line 2" y1="13" transform="translate(0.363 -0.026)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="4"/>
+          <line id="Line_3" data-name="Line 3" y1="3" x2="7" transform="translate(0.363 9.974)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="4"/>
+        </g>
+      </g>
+    </g>
+    <text id="_30-45_Minutes" data-name="30-45 Minutes" transform="translate(311 210)" font-size="20" font-family="Raanana"><tspan x="0" y="15">30-45 </tspan><tspan y="15" font-family="Times-Roman, Times">Minutes</tspan></text>
+  </g>
+</svg>
