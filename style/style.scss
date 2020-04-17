@@ -1,12 +1,23 @@
+@font-face {
+    font-family: 'cintzelBold';
+    src: url('../font/Cinzel-Bold.ttf');
+  }
+
 body {
     margin: 0;
+    font-family: 'cintzelBold';
+
+    h2 {
+        font-family: 'cintzelBold';
+    }
 }
+
 
 #main-container {
     a.start-game-btn {
         display: block;
         text-decoration: none;
-        background-color: #4F0E04;
+        background-color: #3a0a0a;
         color: #ffffff;
         padding: 15px;
         border-radius: 15px;
@@ -48,8 +59,8 @@ body {
     
     .logo {
         width: auto;
-        height: 120px;
-        margin-top: 20px;
+        height: 150px;
+        margin: 20px 0 20px;
 
         img {
             height: 100%;
@@ -57,7 +68,7 @@ body {
     }
 
     .rule_icon_container {
-        margin-top: 20px;
+        margin-top: 30px;
 
         .rule_icon {
             width: auto;
@@ -80,13 +91,13 @@ body {
     .character-card {
         width: 17%;
         height: 500px;
-        border: 4px solid #000000;
-        background-color: #000000;
+        background-color: #221f20;
         background-size: 40px 40px;
         margin: 15px;
         border-radius: 20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
         transition: transform .4s;
+        cursor: pointer;
     }
 
     .character-card:hover {
@@ -101,10 +112,12 @@ body {
 
     h2 {
         color: #ffffff;
+        padding: 10px;
     }
 
     p {
     color: #ffffff;
+    padding: 10px;
     }
 }
 
@@ -114,10 +127,10 @@ body {
         flex-wrap: wrap;
         width: 90%;
         margin: 0 auto;
-        background-image: url(../img/paper-bg.jpg);
-        background-size: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
+        margin-bottom: 20px;
+        background-color: #221f20;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
 
         .game-piece {
             display: flex;
@@ -126,28 +139,24 @@ body {
             width: 20%;
             height: 100px;
             border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
             box-sizing: border-box;
             margin: 0;
 
             .number {
                 display: block;
+                border: 2px solid #000000;
                 border-radius: 99px;
                 background-color: #ffffff;
                 padding: 20px;
             }
 
             .trap {
-                background-color: #4F0E04;
+                background-color: #3a0a0a;
+                border: 2px solid #ffffff;
                 color: #ffffff;
             }
 
-            .start {
-             
-            }
-
-            .corner-right-down{
-                
-            }
         }
     }
 }
@@ -157,7 +166,7 @@ body {
     .roll-dice-btn {
         display: block;
         text-decoration: none;
-        background-color: #4F0E04;
+        background-color: #3a0a0a;
         color: #ffffff;
         padding: 15px;
         border-radius: 15px;
@@ -170,7 +179,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
  
     #card-container {
 
