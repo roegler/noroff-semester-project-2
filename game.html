@@ -26,6 +26,7 @@
     <main id="main-container">
 
         <div class="game-container">
+
             <div class="game-piece">
                 <span class="number start">END</span>
             </div>
@@ -115,14 +116,36 @@
             </div>
             <div class="game-piece">
                 <span class="number start">START</span>
+                <div id="token-player1"><img src="img/token_player-1.svg" alt="token player1" height="25"></div>
+                <div id="token-player2"><img src="img/token_player-2.svg" alt="token player2" height="25"></div>
+            </div>
+        </div>
+
+        <div id="players-container">
+            <div id="character-selector">
+                <div id="game-card-container"></div>
+            </div>
+            <div class="dice-button-container">
+                <img src="img/token_player-1.svg" alt="token player1">
+                <button onclick="rollDice()" id="roll-dice-btn-player1">Roll dice</button>
+
+                <button onclick="rollDice()" id="roll-dice-btn-player2">Roll dice</button>
+                <img src="img/token_player-2.svg" alt="token player2">
             </div>
         </div>
     </main>
 
-    <footer id="footer-container">
-            <div id="character-selector">
-                <div id="card-container"></div>
-            </div>
+    <footer class="page-footer">
+        <a href="index.html" class="logo">
+            <img src="img/logo_transparent_white.png" alt="logo" height="130">
+        </a>
+
+        <div class="rule_icon_container flex-1">
+            <img class="rule_icon" src="img/icon_players_001-white.png" alt="number of players" height="70">
+            <img class="rule_icon" src="img/icon_time_001_white.png" alt="time estimate" height="70">
+            <img class="rule_icon" src="img/icon_age_001_white.png" alt="age of the players" height="70">
+        </div>
+
     </footer>
 
     <script src="script.js"></script>

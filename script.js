@@ -1,12 +1,3 @@
-/*fetch("./characters.json")
-.then (response=> {
-    return response.json()
-})
-.then (data => {
-    for (var i = 0; i < data.lenght; i++) {
-        addCard (data[i])
-    }
-})*/
 
 var characters = [
     { "Id": 743, "Name": "MELISANDRE", "characterIMG": "img/character_melisandre.png", "IsFemale": true, "Culture": "Asshai", "Titles": [], "Aliases": ["The Red Priestess", "The Red Woman", "The King's Red Shadow", "Lady Red", "Lot Seven"], "Born": "At Unknown", "Died": "", "Father": null, "Mother": null, "Spouse": null, "Children": [], "Allegiances": [], "Books": [2, 3, 5], "PovBooks": [8], "PlayedBy": ["Carice van Houten"], "TvSeries": ["Season 2", "Season 3", "Season 4", "Season 5", "Season 6"] },
@@ -27,16 +18,157 @@ for (var i = 0; i < characters.length; i++) {
 }
 
 function addCard(cardData) {
-    document.getElementById('card-container').innerHTML += `<div class="character-card" onclick="selectedCard()">
+    if (!document.getElementById('card-container')) {
+        return
+    }
+    var characterCard = document.createElement('div')
+    characterCard.className = 'character-card'
+    characterCard.innerHTML = `
     <h2 class="character-name">${cardData.Name}</h2>
     <img class="character-picture" src="${cardData.characterIMG}" alt="">
     <p>${cardData.Culture}</p>
-    </div>`
-    console.log(cardData)
+    `
+    characterCard.onclick = function () {
+        selectedCard(characterCard, cardData)
+    }
+
+    document.getElementById('card-container').appendChild(characterCard)
 }
 
-function selectedCard(e) {
-    console.log(e)
-    document.getElementById("card-container").innerHTML = "This card is now selected";
+function addCardForSelectedPlayers() {
+    if (!document.getElementById('game-card-container')) {
+        return
+    }
+
+    if (localStorage.getItem('player-1')) {
+        var player1 = JSON.parse(localStorage.getItem('player-1'))
+
+        var characterCard = document.createElement('div')
+        characterCard.className = 'character-card'
+        characterCard.innerHTML = `
+    <h2 class="character-name">${player1.Name}</h2>
+    <img class="character-picture" src="${player1.characterIMG}" alt="">
+    <p>${player1.Culture}</p>
+    `
+
+        document.getElementById('game-card-container').appendChild(characterCard)
+    }
+
+    if (localStorage.getItem('player-2')) {
+        var player2 = JSON.parse(localStorage.getItem('player-2'))
+        
+        var characterCard = document.createElement('div')
+        characterCard.className = 'character-card'
+        characterCard.innerHTML = `
+    <h2 class="character-name">${player2.Name}</h2>
+    <img class="character-picture" src="${player2.characterIMG}" alt="">
+    <p>${player2.Culture}</p>
+    `
+
+        document.getElementById('game-card-container').appendChild(characterCard)
+    }
+
 }
+
+function selectedCard(characterCard, cardData) {
+
+    var numberOfSelected = document.getElementsByClassName('selected').length
+
+    if (characterCard.className.includes('selected')) {
+        characterCard.className = 'character-card'
+        if (JSON.stringify(cardData) == localStorage.getItem('player-1')) {
+            localStorage.removeItem('player-1')
+        } else if (JSON.stringify(cardData) == localStorage.getItem('player-2')) {
+            localStorage.removeItem('player-2')
+        }
+    } else {
+        if (numberOfSelected >= 2) {
+            alert('You can only select two characters')
+            return
+        }
+
+        characterCard.className = 'character-card selected'
+
+        if (!localStorage.getItem('player-1')) {
+            localStorage.setItem('player-1', JSON.stringify(cardData))
+        } else if (!localStorage.getItem('player-2')) {
+            localStorage.setItem('player-2', JSON.stringify(cardData))
+        }
+
+    }
+
+}
+
+function removeAllPlayers() {
+        localStorage.removeItem('player-1')
+        localStorage.removeItem('player-2')  
+}
+
+if (document.getElementById('card-container')) {
+    removeAllPlayers()
+}
+
+
+
+function rollDice() {
+    var diceRoll = Math.floor( Math.random() * 6 ) +1;
+    console.log(diceRoll)
+
+    moveForward(diceRoll)
+
+    /*if (document.getElementById('roll-dice-btn-player1').clicked == false) {
+       alert('Please press the roll dice button')
+
+    } else if (document.getElementById('roll-dice-btn-player1').clicked == true)
+    // burde det være en funksjon her som heter noe som 'move token' value of dice
+    rollDice()*/
+}
+
+var moveToken = document.getElementById('token-player1');
+    var pos = 0;
+    var id;
+
+function moveForward(numberOnDice) {
+    moveToken.style.position = 'relative'
+    id = setInterval(animateFrame, 10);
+
+    function animateFrame() {
+        pos = pos + numberOnDice;
+        moveToken.style.right = pos + 'px';
+
+        if(pos % 200 === 0) {
+            clearInterval(id)
+        }
+    }
+
+    
+}
+
+var moveToken = document.getElementById('token-player2');
+    var pos = 0;
+    var id;
+
+function moveForward(numberOnDice) {
+    moveToken.style.position = 'relative'
+    id = setInterval(animateFrame, 10);
+
+    function animateFrame() {
+        pos = pos + numberOnDice;
+        moveToken.style.right = pos + 'px';
+
+        if(pos % 200 === 0) {
+            clearInterval(id)
+        }
+    }
+
+    
+}
+
+
+
+
+
+
+addCardForSelectedPlayers()
+
 
