@@ -12,7 +12,6 @@ body {
     }
 }
 
-
 #main-container {
     a.start-game-btn {
         display: block;
@@ -74,7 +73,7 @@ body {
             width: auto;
             height: 70px;
             float: right;
-            margin: 10px;
+            margin: 20px;
         }
 
     }
@@ -93,16 +92,20 @@ body {
         height: 500px;
         background-color: #221f20;
         background-size: 40px 40px;
-        margin: 15px;
+        margin: 20px;
         border-radius: 20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
         transition: transform .4s;
         cursor: pointer;
         box-sizing: border-box;
 
-        &.selected {
+        &.red-card {
             background-color: #3a0a0a;
-            //border: 4px solid #3a0a0a;
+            transform: scale(1.1);
+        }
+
+        &.blue-card {
+            background-color: #051540;
             transform: scale(1.1);
         }
 
@@ -129,13 +132,26 @@ body {
 }
 
 #main-container {
-    .game-container {
+    #game-board {
         display: flex;
         flex-wrap: wrap;
+        width: 100%; 
+    }
+
+    #token-player1, #token-player2 {
+        position: absolute;
+        bottom: 100px;
+        right: 50px;
+    }
+
+    .game-container {
+        position: relative;
         width: 90%;
         margin: 0 auto;
         margin-bottom: 20px;
-        background-color: #ffffff;
+        background-image: url(../img/kings_landing_bg_board_game_by_steve_lund.jpg);
+        background-size: 100%;
+        background-repeat: no-repeat;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
         border-radius: 20px;
 
@@ -150,6 +166,12 @@ body {
             box-sizing: border-box;
             margin: 0;
 
+            &.trap .number {
+                background-color: #3a0a0a;
+                border: 2px solid #ffffff;
+                color: #ffffff;
+            }
+
             .number {
                 display: block;
                 border: 2px solid #000000;
@@ -158,16 +180,9 @@ body {
                 padding: 20px;
             }
 
-            .trap {
-                background-color: #3a0a0a;
-                border: 2px solid #ffffff;
-                color: #ffffff;
-            }
-
         }
     }
 }
-
 
 #players-container {
     .dice-button-container {
@@ -226,6 +241,15 @@ body {
     margin-top: 10%;
     padding: 40px;
     background-color: #221f20;
+
+    .credit-fan-art p {
+        color: #ffffff;
+        padding-top: 5%;
+    }
+
+    .rule_icon {
+        padding: 10px 10px;
+    }
 }
 
 @media only screen and (max-width: 1000px) {

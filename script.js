@@ -44,7 +44,7 @@ function addCardForSelectedPlayers() {
         var player1 = JSON.parse(localStorage.getItem('player-1'))
 
         var characterCard = document.createElement('div')
-        characterCard.className = 'character-card'
+        characterCard.className = 'character-card red-card'
         characterCard.innerHTML = `
     <h2 class="character-name">${player1.Name}</h2>
     <img class="character-picture" src="${player1.characterIMG}" alt="">
@@ -56,9 +56,9 @@ function addCardForSelectedPlayers() {
 
     if (localStorage.getItem('player-2')) {
         var player2 = JSON.parse(localStorage.getItem('player-2'))
-        
+
         var characterCard = document.createElement('div')
-        characterCard.className = 'character-card'
+        characterCard.className = 'character-card blue-card'
         characterCard.innerHTML = `
     <h2 class="character-name">${player2.Name}</h2>
     <img class="character-picture" src="${player2.characterIMG}" alt="">
@@ -87,11 +87,11 @@ function selectedCard(characterCard, cardData) {
             return
         }
 
-        characterCard.className = 'character-card selected'
-
         if (!localStorage.getItem('player-1')) {
+            characterCard.className = 'character-card selected red-card'
             localStorage.setItem('player-1', JSON.stringify(cardData))
         } else if (!localStorage.getItem('player-2')) {
+            characterCard.className = 'character-card selected blue-card'
             localStorage.setItem('player-2', JSON.stringify(cardData))
         }
 
@@ -100,75 +100,129 @@ function selectedCard(characterCard, cardData) {
 }
 
 function removeAllPlayers() {
-        localStorage.removeItem('player-1')
-        localStorage.removeItem('player-2')  
+    localStorage.removeItem('player-1')
+    localStorage.removeItem('player-2')
 }
 
 if (document.getElementById('card-container')) {
     removeAllPlayers()
 }
 
+function rollDice(player) {
+    var diceRoll = Math.floor(Math.random() * 6) + 1;
 
+    console.log('did roll ' + diceRoll)
 
-function rollDice() {
-    var diceRoll = Math.floor( Math.random() * 6 ) +1;
-    console.log(diceRoll)
-
-    moveForward(diceRoll)
-
-    /*if (document.getElementById('roll-dice-btn-player1').clicked == false) {
-       alert('Please press the roll dice button')
-
-    } else if (document.getElementById('roll-dice-btn-player1').clicked == true)
-    // burde det være en funksjon her som heter noe som 'move token' value of dice
-    rollDice()*/
+    moveForward(diceRoll, player)
 }
 
-var moveToken = document.getElementById('token-player1');
-    var pos = 0;
-    var id;
+function moveForward(numberOnDice, playerId) {
+    var playerToMove = document.getElementById(playerId)
+    var gamePiece = playerToMove.parentElement
+    var currentPosition = parseInt(gamePiece.dataset.position)
+    var targetPosition = currentPosition + numberOnDice
 
-function moveForward(numberOnDice) {
-    moveToken.style.position = 'relative'
-    id = setInterval(animateFrame, 10);
+    var allGamePieces = document.getElementById('game-board').children
+    var targetGamePieces = []
+    for (var i = 0; i < allGamePieces.length; i++) {
+        if (allGamePieces[i].dataset.position > currentPosition && allGamePieces[i].dataset.position <= targetPosition) {
+            targetGamePieces.push(allGamePieces[i])
+        }
+    }
+    targetGamePieces.reverse()
 
-    function animateFrame() {
-        pos = pos + numberOnDice;
-        moveToken.style.right = pos + 'px';
+    for (let i = 0; i < targetGamePieces.length; i++) {
+        setTimeout(function () {
+            var target = targetGamePieces[i]
+            var cloned = playerToMove.parentNode.removeChild(playerToMove)
+            target.append(cloned)
+        }, 500 * i)
+    }
 
-        if(pos % 200 === 0) {
-            clearInterval(id)
+    var lastGamePiece = targetGamePieces[targetGamePieces.length - 1]
+    /*if (lastGamePiece.classList.contains('trap')) {
+        alert('Drogon is blocking the way. You will be chased five steps back.')
+        moveBack(5, playerId)
+    }*/
+}
+
+// make the moveBack function synchronus
+/*doSomething();
+doSomethingElse();
+doSomethingUsefulThisTime();*/
+
+function moveBack(numberOfStepsBack, playerId) {
+    var playerToMoveBack = document.getElementById(playerId)
+    var gamePiece = playerToMoveBack.parentElement
+    var currentPosition = parseInt(gamePiece.dataset.position)
+    var targetPosition = currentPosition - numberOfStepsBack
+
+    var allGamePieces = document.getElementById('game-board').children
+    var targetGamePieces = []
+    for (var i = 0; i < allGamePieces.length; i++) {
+        if (allGamePieces[i].dataset.position < currentPosition && allGamePieces[i].dataset.position >= targetPosition) {
+            targetGamePieces.push(allGamePieces[i])
         }
     }
 
-    
-}
-
-var moveToken = document.getElementById('token-player2');
-    var pos = 0;
-    var id;
-
-function moveForward(numberOnDice) {
-    moveToken.style.position = 'relative'
-    id = setInterval(animateFrame, 10);
-
-    function animateFrame() {
-        pos = pos + numberOnDice;
-        moveToken.style.right = pos + 'px';
-
-        if(pos % 200 === 0) {
-            clearInterval(id)
-        }
+    for (let i = 0; i < targetGamePieces.length; i++) {
+        setTimeout(function () {
+            var target = targetGamePieces[i]
+            var cloned = playerToMoveBack.parentNode.removeChild(playerToMoveBack)
+            target.append(cloned)
+        }, 500 * i)
     }
 
-    
+    var lastGamePiece = targetGamePieces[targetGamePieces.length - 1]
+    if (lastGamePiece.classList.contains('end')) {
+        redirectWinner()
+    }
 }
 
-
-
-
-
+function redirectWinner() {
+    location.replace('file:///Users/marierogler/Websites/Semester%20project%202%20board%20game/winner.html');
+    // remember ro change url when uploaded to filezilla
+    console.log (redirectWinner)
+}
 
 addCardForSelectedPlayers()
 
+// start JS index.html page
 
+/*
+When both players have selected their character the
+'start game btn' should be marked in some way.
+*/
+
+// end JS index.html page
+
+
+// start JS game.html page
+
+/*
+Each player should be noticed when it is their turn to roll dice.
+'roll dice btn'should be marked with a background color or a colored border.
+*/
+
+/*
+Make a display where the number on the dice will show.
+Or should the palyer token just move to its place with out displaying it?
+*/
+
+/*
+The first player to hit the 'END' piece should autmoatucally be sendt to the winner.html page.
+
+Make an alert/ pop up with a button to press, this vill replace() the page with the winner.html page 
+*/
+
+// end JS game.html page
+
+
+// start js winner.html page 
+
+/*
+A animeted dragon should move over the screen with a banner to its tale
+Text on banner: congratulation your the winner!
+*/
+
+// end js winner.html page

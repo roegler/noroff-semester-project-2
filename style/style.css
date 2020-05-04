@@ -62,7 +62,7 @@ body h2 {
   width: auto;
   height: 70px;
   float: right;
-  margin: 10px;
+  margin: 20px;
 }
 
 #card-container, #game-card-container {
@@ -77,15 +77,19 @@ body h2 {
   height: 500px;
   background-color: #221f20;
   background-size: 40px 40px;
-  margin: 15px;
+  margin: 20px;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
   transition: transform 0.4s;
   cursor: pointer;
   box-sizing: border-box;
 }
-#card-container .character-card.selected, #game-card-container .character-card.selected {
+#card-container .character-card.red-card, #game-card-container .character-card.red-card {
   background-color: #3a0a0a;
+  transform: scale(1.1);
+}
+#card-container .character-card.blue-card, #game-card-container .character-card.blue-card {
+  background-color: #051540;
   transform: scale(1.1);
 }
 #card-container .character-card:hover, #game-card-container .character-card:hover {
@@ -105,13 +109,24 @@ body h2 {
   padding: 10px;
 }
 
-#main-container .game-container {
+#main-container #game-board {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+}
+#main-container #token-player1, #main-container #token-player2 {
+  position: absolute;
+  bottom: 100px;
+  right: 50px;
+}
+#main-container .game-container {
+  position: relative;
   width: 90%;
   margin: 0 auto;
   margin-bottom: 20px;
-  background-color: #ffffff;
+  background-image: url(../img/kings_landing_bg_board_game_by_steve_lund.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
   border-radius: 20px;
 }
@@ -125,17 +140,17 @@ body h2 {
   box-sizing: border-box;
   margin: 0;
 }
+#main-container .game-container .game-piece.trap .number {
+  background-color: #3a0a0a;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
 #main-container .game-container .game-piece .number {
   display: block;
   border: 2px solid #000000;
   border-radius: 99px;
   background-color: #ffffff;
   padding: 20px;
-}
-#main-container .game-container .game-piece .trap {
-  background-color: #3a0a0a;
-  border: 2px solid #ffffff;
-  color: #ffffff;
 }
 
 #players-container .dice-button-container {
@@ -189,6 +204,13 @@ body h2 {
   margin-top: 10%;
   padding: 40px;
   background-color: #221f20;
+}
+.page-footer .credit-fan-art p {
+  color: #ffffff;
+  padding-top: 5%;
+}
+.page-footer .rule_icon {
+  padding: 10px 10px;
 }
 
 @media only screen and (max-width: 1000px) {
