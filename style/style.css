@@ -10,7 +10,11 @@ body h2 {
   font-family: "cintzelBold";
 }
 
-#main-container a.start-game-btn {
+#main-container-index-page {
+  display: flex;
+  flex-direction: column;
+}
+#main-container-index-page a.start-game-btn {
   display: block;
   text-decoration: none;
   background-color: #3a0a0a;
@@ -24,17 +28,17 @@ body h2 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
   transition: transform 0.2s;
 }
-#main-container .start-game-btn:hover {
+#main-container-index-page .start-game-btn:hover {
   transform: scale(1.2);
 }
-#main-container .heading {
+#main-container-index-page .heading {
   text-align: center;
 }
-#main-container .heading p {
+#main-container-index-page .heading p {
   font-size: 20px;
   font-weight: bold;
 }
-#main-container .heading h2 {
+#main-container-index-page .heading h2 {
   font-size: 30px;
 }
 
@@ -67,8 +71,6 @@ body h2 {
 
 #card-container, #game-card-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
   text-align: center;
 }
@@ -109,6 +111,16 @@ body h2 {
   padding: 10px;
 }
 
+#game-card-container .character-card {
+  width: 50%;
+  margin-top: 55px;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 5%;
+}
 #main-container #game-board {
   display: flex;
   flex-wrap: wrap;
@@ -121,11 +133,10 @@ body h2 {
 }
 #main-container .game-container {
   position: relative;
-  width: 90%;
-  margin: 0 auto;
+  width: 80%;
+  height: 40%;
   margin-bottom: 20px;
   background-image: url(../img/kings_landing_bg_board_game_by_steve_lund.jpg);
-  background-size: 100%;
   background-repeat: no-repeat;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
   border-radius: 20px;

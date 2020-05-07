@@ -12,7 +12,10 @@ body {
     }
 }
 
-#main-container {
+#main-container-index-page {
+    display: flex;
+    flex-direction: column;
+    
     a.start-game-btn {
         display: block;
         text-decoration: none;
@@ -82,8 +85,6 @@ body {
 
 #card-container, #game-card-container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
     text-align: center;
 
@@ -131,7 +132,18 @@ body {
     }
 }
 
+#game-card-container {
+    .character-card {
+        width: 50%;
+        margin-top: 55px;
+    }
+}
+
 #main-container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 5%;
+
     #game-board {
         display: flex;
         flex-wrap: wrap;
@@ -146,11 +158,10 @@ body {
 
     .game-container {
         position: relative;
-        width: 90%;
-        margin: 0 auto;
+        width: 80%;
+        height: 40%;
         margin-bottom: 20px;
         background-image: url(../img/kings_landing_bg_board_game_by_steve_lund.jpg);
-        background-size: 100%;
         background-repeat: no-repeat;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
         border-radius: 20px;
@@ -161,7 +172,6 @@ body {
             align-items: center;
             width: 20%;
             height: 150px;
-            //border: 1px solid #221f20;
             border-radius: 20px;
             box-sizing: border-box;
             margin: 0;

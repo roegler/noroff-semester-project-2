@@ -1,4 +1,6 @@
 
+var playersTurnToRollDice = 'player1'
+
 var characters = [
     { "Id": 743, "Name": "MELISANDRE", "characterIMG": "img/character_melisandre.png", "IsFemale": true, "Culture": "Asshai", "Titles": [], "Aliases": ["The Red Priestess", "The Red Woman", "The King's Red Shadow", "Lady Red", "Lot Seven"], "Born": "At Unknown", "Died": "", "Father": null, "Mother": null, "Spouse": null, "Children": [], "Allegiances": [], "Books": [2, 3, 5], "PovBooks": [8], "PlayedBy": ["Carice van Houten"], "TvSeries": ["Season 2", "Season 3", "Season 4", "Season 5", "Season 6"] },
     { "Id": 823, "Name": "PETRY BAELISH", "characterIMG": "img/character_little_finger.png", "IsFemale": false, "Culture": "Valemen", "Titles": ["Master of coin (formerly)", "Lord Paramount of the Trident", "Lord of Harrenhal", "Lord Protector of the Vale"], "Aliases": ["Littlefinger"], "Born": "In 268 AC, at the Fingers", "Died": "", "Father": null, "Mother": null, "Spouse": 688, "Children": [], "Allegiances": [11, 10], "Books": [1, 2, 3, 5, 8], "PovBooks": [], "PlayedBy": ["Aidan Gillen"], "TvSeries": ["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6"] },
@@ -110,10 +112,23 @@ if (document.getElementById('card-container')) {
 
 function rollDice(player) {
     var diceRoll = Math.floor(Math.random() * 6) + 1;
+    
+    var diceImage = document.getElementById('dice-image')
+    diceImage.src = 'img/dice/' + diceRoll + '.png'
 
     console.log('did roll ' + diceRoll)
 
     moveForward(diceRoll, player)
+
+    if (diceRoll==6) {
+        alert('You rolled 6 on the dice, your turn again!')
+    }
+
+    if (playersTurnToRollDice == 'player1') {
+        playersTurnToRollDice = 'player2'
+    } else if (playersTurnToRollDice == 'player2') {
+        playersTurnToRollDice = 'player1'
+    }
 }
 
 function moveForward(numberOnDice, playerId) {
@@ -140,16 +155,12 @@ function moveForward(numberOnDice, playerId) {
     }
 
     var lastGamePiece = targetGamePieces[targetGamePieces.length - 1]
-    /*if (lastGamePiece.classList.contains('trap')) {
+    if (lastGamePiece.classList.contains('trap')) {
         alert('Drogon is blocking the way. You will be chased five steps back.')
         moveBack(5, playerId)
-    }*/
+    }
 }
 
-// make the moveBack function synchronus
-/*doSomething();
-doSomethingElse();
-doSomethingUsefulThisTime();*/
 
 function moveBack(numberOfStepsBack, playerId) {
     var playerToMoveBack = document.getElementById(playerId)
@@ -205,15 +216,15 @@ Each player should be noticed when it is their turn to roll dice.
 */
 
 /*
-Make a display where the number on the dice will show.
-Or should the palyer token just move to its place with out displaying it?
-*/
-
-/*
 The first player to hit the 'END' piece should autmoatucally be sendt to the winner.html page.
 
 Make an alert/ pop up with a button to press, this vill replace() the page with the winner.html page 
 */
+
+// make the moveBack function synchronus
+/*doSomething();
+doSomethingElse();
+doSomethingUsefulThisTime();*/
 
 // end JS game.html page
 
