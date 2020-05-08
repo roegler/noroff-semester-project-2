@@ -47,10 +47,12 @@ function addCardForSelectedPlayers() {
 
         var characterCard = document.createElement('div')
         characterCard.className = 'character-card red-card'
+        characterCard.id = 'player1-card'
         characterCard.innerHTML = `
     <h2 class="character-name">${player1.Name}</h2>
     <img class="character-picture" src="${player1.characterIMG}" alt="">
     <p>${player1.Culture}</p>
+    <img src="img/token_player-1.svg" class="character-token" alt="token player1">
     `
 
         document.getElementById('game-card-container').appendChild(characterCard)
@@ -60,11 +62,13 @@ function addCardForSelectedPlayers() {
         var player2 = JSON.parse(localStorage.getItem('player-2'))
 
         var characterCard = document.createElement('div')
-        characterCard.className = 'character-card blue-card'
+        characterCard.className = 'character-card blue-card not-active'
+        characterCard.id = 'player2-card'
         characterCard.innerHTML = `
     <h2 class="character-name">${player2.Name}</h2>
     <img class="character-picture" src="${player2.characterIMG}" alt="">
     <p>${player2.Culture}</p>
+    <img src="img/token_player-2.svg" class="character-token" alt="token player2">
     `
 
         document.getElementById('game-card-container').appendChild(characterCard)
@@ -101,6 +105,15 @@ function selectedCard(characterCard, cardData) {
 
 }
 
+function startGameButton() {
+    if (!localStorage.getItem('player-1') || !localStorage.getItem('player-2')) {
+        alert('Please select 2 characters to continue')
+        return
+    }
+
+    location.href = 'game.html'
+}
+
 function removeAllPlayers() {
     localStorage.removeItem('player-1')
     localStorage.removeItem('player-2')
@@ -110,28 +123,35 @@ if (document.getElementById('card-container')) {
     removeAllPlayers()
 }
 
-function rollDice(player) {
+function rollDice() {
+
     var diceRoll = Math.floor(Math.random() * 6) + 1;
-    
+
     var diceImage = document.getElementById('dice-image')
     diceImage.src = 'img/dice/' + diceRoll + '.png'
 
     console.log('did roll ' + diceRoll)
 
-    moveForward(diceRoll, player)
+    moveForward(diceRoll, playersTurnToRollDice, function(){
+        if (diceRoll == 6) {
+            alert('You rolled 6 on the dice, your turn again!')
+            return
+        }
+    
+        if (playersTurnToRollDice == 'player1') {
+            playersTurnToRollDice = 'player2'
+            document.getElementById('player1-card').classList.add('not-active')
+            document.getElementById('player2-card').classList.remove('not-active')
+        } else if (playersTurnToRollDice == 'player2') {
+            playersTurnToRollDice = 'player1'
+            document.getElementById('player2-card').classList.add('not-active')
+            document.getElementById('player1-card').classList.remove('not-active')
+        }
+    })
 
-    if (diceRoll==6) {
-        alert('You rolled 6 on the dice, your turn again!')
-    }
-
-    if (playersTurnToRollDice == 'player1') {
-        playersTurnToRollDice = 'player2'
-    } else if (playersTurnToRollDice == 'player2') {
-        playersTurnToRollDice = 'player1'
-    }
 }
 
-function moveForward(numberOnDice, playerId) {
+function moveForward(numberOnDice, playerId, moveCompleted) {
     var playerToMove = document.getElementById(playerId)
     var gamePiece = playerToMove.parentElement
     var currentPosition = parseInt(gamePiece.dataset.position)
@@ -151,18 +171,28 @@ function moveForward(numberOnDice, playerId) {
             var target = targetGamePieces[i]
             var cloned = playerToMove.parentNode.removeChild(playerToMove)
             target.append(cloned)
-        }, 500 * i)
-    }
 
-    var lastGamePiece = targetGamePieces[targetGamePieces.length - 1]
-    if (lastGamePiece.classList.contains('trap')) {
-        alert('Drogon is blocking the way. You will be chased five steps back.')
-        moveBack(5, playerId)
+            setTimeout(function(){
+                if (i == targetGamePieces.length - 1) {
+                    var lastGamePiece = targetGamePieces[targetGamePieces.length - 1]
+                    if (lastGamePiece.classList.contains('trap')) {
+                        alert('Drogon is blocking the way. You will be chased five steps back.')
+                        moveBack(5, playerId, function(){
+                            moveCompleted()
+                        })
+                    } else if (lastGamePiece.classList.contains('end')) {
+                        redirectWinner()
+                    } else {
+                        moveCompleted()
+                    }
+                } 
+            }, 500)
+        }, 500 * i)
     }
 }
 
 
-function moveBack(numberOfStepsBack, playerId) {
+function moveBack(numberOfStepsBack, playerId, moveCompleted) {
     var playerToMoveBack = document.getElementById(playerId)
     var gamePiece = playerToMoveBack.parentElement
     var currentPosition = parseInt(gamePiece.dataset.position)
@@ -181,59 +211,31 @@ function moveBack(numberOfStepsBack, playerId) {
             var target = targetGamePieces[i]
             var cloned = playerToMoveBack.parentNode.removeChild(playerToMoveBack)
             target.append(cloned)
-        }, 500 * i)
-    }
 
-    var lastGamePiece = targetGamePieces[targetGamePieces.length - 1]
-    if (lastGamePiece.classList.contains('end')) {
-        redirectWinner()
+            setTimeout(function(){
+                if (i == targetGamePieces.length - 1) {
+                    moveCompleted()
+                }
+            }, 500)
+
+        }, 500 * i)
     }
 }
 
 function redirectWinner() {
-    location.replace('file:///Users/marierogler/Websites/Semester%20project%202%20board%20game/winner.html');
-    // remember ro change url when uploaded to filezilla
-    console.log (redirectWinner)
+    location.replace('winner.html');
 }
 
 addCardForSelectedPlayers()
 
-// start JS index.html page
 
-/*
-When both players have selected their character the
-'start game btn' should be marked in some way.
-*/
-
-// end JS index.html page
-
-
-// start JS game.html page
-
-/*
-Each player should be noticed when it is their turn to roll dice.
-'roll dice btn'should be marked with a background color or a colored border.
-*/
-
-/*
-The first player to hit the 'END' piece should autmoatucally be sendt to the winner.html page.
-
-Make an alert/ pop up with a button to press, this vill replace() the page with the winner.html page 
-*/
-
-// make the moveBack function synchronus
-/*doSomething();
-doSomethingElse();
-doSomethingUsefulThisTime();*/
-
-// end JS game.html page
 
 
 // start js winner.html page 
 
 /*
-A animeted dragon should move over the screen with a banner to its tale
-Text on banner: congratulation your the winner!
+The winner character should be displayed on the winenr page
+Use local storage.
 */
 
 // end js winner.html page

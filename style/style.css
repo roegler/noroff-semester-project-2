@@ -14,10 +14,11 @@ body h2 {
   display: flex;
   flex-direction: column;
 }
-#main-container-index-page a.start-game-btn {
+#main-container-index-page .start-game-btn {
   display: block;
   text-decoration: none;
   background-color: #3a0a0a;
+  border: none;
   color: #ffffff;
   padding: 15px;
   border-radius: 15px;
@@ -25,6 +26,7 @@ body h2 {
   text-align: center;
   margin: 50px auto;
   font-size: 20px;
+  font-family: "cintzelBold";
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
   transition: transform 0.2s;
 }
@@ -73,6 +75,7 @@ body h2 {
   display: flex;
   justify-content: center;
   text-align: center;
+  flex-wrap: wrap;
 }
 #card-container .character-card, #game-card-container .character-card {
   width: 17%;
@@ -97,9 +100,14 @@ body h2 {
 #card-container .character-card:hover, #game-card-container .character-card:hover {
   transform: scale(1.1);
 }
+#card-container .character-card .character-token, #game-card-container .character-card .character-token {
+  background-color: #ffffff;
+  padding: 5px;
+  width: 50px;
+  height: auto;
+}
 #card-container .character-picture, #game-card-container .character-picture {
-  width: auto;
-  height: 50%;
+  width: 100%;
   border-radius: 20px;
 }
 #card-container h2, #game-card-container h2 {
@@ -112,8 +120,16 @@ body h2 {
 }
 
 #game-card-container .character-card {
-  width: 50%;
+  width: 30%;
+  height: auto;
   margin-top: 55px;
+}
+#game-card-container .character-card.not-active {
+  opacity: 0.5;
+  transform: scale(0.9);
+}
+#game-card-container .character-card .character-name {
+  font-size: 16px;
 }
 
 #main-container {
@@ -138,6 +154,8 @@ body h2 {
   margin-bottom: 20px;
   background-image: url(../img/kings_landing_bg_board_game_by_steve_lund.jpg);
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
   border-radius: 20px;
 }
@@ -146,10 +164,19 @@ body h2 {
   justify-content: center;
   align-items: center;
   width: 20%;
-  height: 150px;
+  padding: 20px;
   border-radius: 20px;
   box-sizing: border-box;
   margin: 0;
+}
+#main-container .game-container .game-piece #player1, #main-container .game-container .game-piece #player2 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+}
+#main-container .game-container .game-piece #player1 img, #main-container .game-container .game-piece #player2 img {
+  width: 100%;
+  height: auto;
 }
 #main-container .game-container .game-piece.trap .number {
   background-color: #3a0a0a;
@@ -168,44 +195,6 @@ body h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
-#players-container #roll-dice-btn-player1 {
-  display: block;
-  text-decoration: none;
-  background-color: #ffffff;
-  color: #221f20;
-  font-family: "cintzelBold";
-  padding: 15px;
-  border-radius: 15px;
-  width: 20%;
-  text-align: center;
-  margin: 20px 20px;
-  font-size: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s;
-}
-#players-container #roll-dice-btn-player1:active {
-  color: #ffffff;
-  background-color: #3A0A0A;
-}
-#players-container #roll-dice-btn-player2 {
-  display: block;
-  text-decoration: none;
-  background-color: #ffffff;
-  color: #221f20;
-  font-family: "cintzelBold";
-  padding: 15px;
-  border-radius: 15px;
-  width: 20%;
-  text-align: center;
-  margin: 20px 20px;
-  font-size: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s;
-}
-#players-container #roll-dice-btn-player2:active {
-  color: #ffffff;
-  background-color: #051540;
 }
 
 .page-footer {
@@ -229,6 +218,10 @@ body h2 {
     width: 80%;
     text-align: center;
     margin: 10px 10px;
+  }
+  #card-container .character-picture {
+    width: auto;
+    height: 300px;
   }
 }
 

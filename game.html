@@ -27,8 +27,8 @@
 
         <div class="game-container">
             <div id="game-board">
-                <div class="game-piece" data-position="30">
-                    <span class="number end">END</span>
+                <div class="game-piece end" data-position="30">
+                    <span class="number">END</span>
                 </div>
                 <div class="game-piece" data-position="29">
                     <span class="number">29</span>
@@ -131,11 +131,7 @@
                 <div id="game-card-container"></div>
             </div>
             <div class="dice-button-container">
-                <img src="img/token_player-1.svg" alt="token player1">
-                <button onclick="rollDice('player1')" id="roll-dice-btn-player1">Roll dice</button>
-
-                <button onclick="rollDice('player2')" id="roll-dice-btn-player2">Roll dice</button>
-                <img src="img/token_player-2.svg" alt="token player2">
+                
 
                 <img src="img/dice/1.png" onclick="rollDice()" id="dice-image" height="150">
             </div>
