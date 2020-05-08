@@ -169,12 +169,12 @@ body h2 {
   box-sizing: border-box;
   margin: 0;
 }
-#main-container .game-container .game-piece #player1, #main-container .game-container .game-piece #player2 {
+#main-container .game-container .game-piece #player-1, #main-container .game-container .game-piece #player-2 {
   position: absolute;
   width: 40px;
   height: 40px;
 }
-#main-container .game-container .game-piece #player1 img, #main-container .game-container .game-piece #player2 img {
+#main-container .game-container .game-piece #player-1 img, #main-container .game-container .game-piece #player-2 img {
   width: 100%;
   height: auto;
 }
@@ -189,6 +189,19 @@ body h2 {
   border-radius: 99px;
   background-color: #ffffff;
   padding: 20px;
+}
+
+.main-container-winner-page {
+  display: flex;
+  flex-direction: column;
+}
+.main-container-winner-page h2 {
+  text-align: center;
+}
+.main-container-winner-page img {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 #players-container .dice-button-container {

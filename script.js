@@ -1,5 +1,5 @@
 
-var playersTurnToRollDice = 'player1'
+var playersTurnToRollDice = 'player-1'
 
 var characters = [
     { "Id": 743, "Name": "MELISANDRE", "characterIMG": "img/character_melisandre.png", "IsFemale": true, "Culture": "Asshai", "Titles": [], "Aliases": ["The Red Priestess", "The Red Woman", "The King's Red Shadow", "Lady Red", "Lot Seven"], "Born": "At Unknown", "Died": "", "Father": null, "Mother": null, "Spouse": null, "Children": [], "Allegiances": [], "Books": [2, 3, 5], "PovBooks": [8], "PlayedBy": ["Carice van Houten"], "TvSeries": ["Season 2", "Season 3", "Season 4", "Season 5", "Season 6"] },
@@ -138,12 +138,12 @@ function rollDice() {
             return
         }
     
-        if (playersTurnToRollDice == 'player1') {
-            playersTurnToRollDice = 'player2'
+        if (playersTurnToRollDice == 'player-1') {
+            playersTurnToRollDice = 'player-2'
             document.getElementById('player1-card').classList.add('not-active')
             document.getElementById('player2-card').classList.remove('not-active')
-        } else if (playersTurnToRollDice == 'player2') {
-            playersTurnToRollDice = 'player1'
+        } else if (playersTurnToRollDice == 'player-2') {
+            playersTurnToRollDice = 'player-1'
             document.getElementById('player2-card').classList.add('not-active')
             document.getElementById('player1-card').classList.remove('not-active')
         }
@@ -181,7 +181,7 @@ function moveForward(numberOnDice, playerId, moveCompleted) {
                             moveCompleted()
                         })
                     } else if (lastGamePiece.classList.contains('end')) {
-                        redirectWinner()
+                        redirectWinner(playerId)
                     } else {
                         moveCompleted()
                     }
@@ -190,7 +190,6 @@ function moveForward(numberOnDice, playerId, moveCompleted) {
         }, 500 * i)
     }
 }
-
 
 function moveBack(numberOfStepsBack, playerId, moveCompleted) {
     var playerToMoveBack = document.getElementById(playerId)
@@ -222,12 +221,23 @@ function moveBack(numberOfStepsBack, playerId, moveCompleted) {
     }
 }
 
-function redirectWinner() {
+function redirectWinner(playerId) {
+    localStorage.setItem('winnerPlayerId', playerId)
     location.replace('winner.html');
 }
 
-addCardForSelectedPlayers()
+function retriveWinnerToWinnerPage() {
+    var winnerPlayerId = localStorage.getItem('winnerPlayerId')
+    var winner = JSON.parse(localStorage.getItem(winnerPlayerId))
 
+    document.getElementById('winner-card-container').innerHTML = `
+    <h2 class="character-name">${winner.Name}</h2>
+    <img class="character-picture" src="${winner.characterIMG}" alt="the winner">
+    `
+}
+
+addCardForSelectedPlayers()
+retriveWinnerToWinnerPage()
 
 
 
