@@ -126,7 +126,7 @@ body {
     }
 
     .character-picture {
-        width: 100%;
+        width: 80%;
         border-radius: 20px;
     }
 
@@ -138,6 +138,19 @@ body {
     p {
     color: #ffffff;
     padding: 10px;
+    }
+}
+
+// animate the winner picture at winner page
+.winner-card-container {
+    .character-picture {
+            animation-name: bounce-2;
+            animation-timing-function: ease;
+        @keyframes bounce-2 {
+            0%   { transform: translateY(0); }
+            50%  { transform: translateY(-100px); }
+            100% { transform: translateY(0); }
+        }
     }
 }
 

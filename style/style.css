@@ -107,7 +107,7 @@ body h2 {
   height: auto;
 }
 #card-container .character-picture, #game-card-container .character-picture {
-  width: 100%;
+  width: 80%;
   border-radius: 20px;
 }
 #card-container h2, #game-card-container h2 {
@@ -117,6 +117,22 @@ body h2 {
 #card-container p, #game-card-container p {
   color: #ffffff;
   padding: 10px;
+}
+
+.winner-card-container .character-picture {
+  animation-name: bounce-2;
+  animation-timing-function: ease;
+}
+@keyframes bounce-2 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 #game-card-container .character-card {

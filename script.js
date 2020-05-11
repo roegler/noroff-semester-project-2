@@ -176,8 +176,8 @@ function moveForward(numberOnDice, playerId, moveCompleted) {
                 if (i == targetGamePieces.length - 1) {
                     var lastGamePiece = targetGamePieces[targetGamePieces.length - 1]
                     if (lastGamePiece.classList.contains('trap')) {
-                        alert('Drogon is blocking the way. You will be chased five steps back.')
-                        moveBack(5, playerId, function(){
+                        alert('Drogon is blocking the way. You will be chased 3 steps back.')
+                        moveBack(3, playerId, function(){
                             moveCompleted()
                         })
                     } else if (lastGamePiece.classList.contains('end')) {
@@ -238,14 +238,3 @@ function retriveWinnerToWinnerPage() {
 
 addCardForSelectedPlayers()
 retriveWinnerToWinnerPage()
-
-
-
-// start js winner.html page 
-
-/*
-The winner character should be displayed on the winenr page
-Use local storage.
-*/
-
-// end js winner.html page
