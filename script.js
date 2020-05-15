@@ -20,6 +20,7 @@ for (var i = 0; i < characters.length; i++) {
 }
 
 function addCard(cardData) {
+    
     if (!document.getElementById('card-container')) {
         return
     }
@@ -38,6 +39,7 @@ function addCard(cardData) {
 }
 
 function addCardForSelectedPlayers() {
+
     if (!document.getElementById('game-card-container')) {
         return
     }
@@ -106,6 +108,7 @@ function selectedCard(characterCard, cardData) {
 }
 
 function startGameButton() {
+
     if (!localStorage.getItem('player-1') || !localStorage.getItem('player-2')) {
         alert('Please select 2 characters to continue')
         return
@@ -115,6 +118,7 @@ function startGameButton() {
 }
 
 function removeAllPlayers() {
+
     localStorage.removeItem('player-1')
     localStorage.removeItem('player-2')
 }
@@ -129,8 +133,6 @@ function rollDice() {
 
     var diceImage = document.getElementById('dice-image')
     diceImage.src = 'img/dice/' + diceRoll + '.png'
-
-    console.log('did roll ' + diceRoll)
 
     moveForward(diceRoll, playersTurnToRollDice, function(){
         if (diceRoll == 6) {
@@ -152,6 +154,7 @@ function rollDice() {
 }
 
 function moveForward(numberOnDice, playerId, moveCompleted) {
+
     var playerToMove = document.getElementById(playerId)
     var gamePiece = playerToMove.parentElement
     var currentPosition = parseInt(gamePiece.dataset.position)
@@ -192,6 +195,7 @@ function moveForward(numberOnDice, playerId, moveCompleted) {
 }
 
 function moveBack(numberOfStepsBack, playerId, moveCompleted) {
+
     var playerToMoveBack = document.getElementById(playerId)
     var gamePiece = playerToMoveBack.parentElement
     var currentPosition = parseInt(gamePiece.dataset.position)
@@ -222,11 +226,13 @@ function moveBack(numberOfStepsBack, playerId, moveCompleted) {
 }
 
 function redirectWinner(playerId) {
+
     localStorage.setItem('winnerPlayerId', playerId)
     location.replace('winner.html');
 }
 
 function retriveWinnerToWinnerPage() {
+
     var winnerPlayerId = localStorage.getItem('winnerPlayerId')
     var winner = JSON.parse(localStorage.getItem(winnerPlayerId))
 
