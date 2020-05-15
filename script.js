@@ -1,5 +1,6 @@
 
 var playersTurnToRollDice = 'player-1'
+var canRollDice = true
 
 var characters = [
     { "Id": 743, "Name": "MELISANDRE", "characterIMG": "img/character_melisandre.png", "IsFemale": true, "Culture": "Asshai", "Titles": [], "Aliases": ["The Red Priestess", "The Red Woman", "The King's Red Shadow", "Lady Red", "Lot Seven"], "Born": "At Unknown", "Died": "", "Father": null, "Mother": null, "Spouse": null, "Children": [], "Allegiances": [], "Books": [2, 3, 5], "PovBooks": [8], "PlayedBy": ["Carice van Houten"], "TvSeries": ["Season 2", "Season 3", "Season 4", "Season 5", "Season 6"] },
@@ -129,6 +130,12 @@ if (document.getElementById('card-container')) {
 
 function rollDice() {
 
+    if (canRollDice == false) {
+        return
+    }
+
+    canRollDice = false 
+
     var diceRoll = Math.floor(Math.random() * 6) + 1;
 
     var diceImage = document.getElementById('dice-image')
@@ -149,7 +156,9 @@ function rollDice() {
             document.getElementById('player2-card').classList.add('not-active')
             document.getElementById('player1-card').classList.remove('not-active')
         }
-    })
+
+        canRollDice = true 
+    }) 
 
 }
 
