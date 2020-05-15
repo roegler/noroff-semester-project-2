@@ -101,7 +101,6 @@ body h2 {
   transform: scale(1.1);
 }
 #card-container .character-card .character-token, #game-card-container .character-card .character-token {
-  background-color: #ffffff;
   padding: 5px;
   width: 50px;
   height: auto;

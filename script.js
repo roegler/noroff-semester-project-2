@@ -55,7 +55,7 @@ function addCardForSelectedPlayers() {
     <h2 class="character-name">${player1.Name}</h2>
     <img class="character-picture" src="${player1.characterIMG}" alt="">
     <p>${player1.Culture}</p>
-    <img src="img/token_player-1.svg" class="character-token" alt="token player1">
+    <img src="img/token_white_player1.png" class="character-token" alt="token player1">
     `
 
         document.getElementById('game-card-container').appendChild(characterCard)
@@ -71,7 +71,7 @@ function addCardForSelectedPlayers() {
     <h2 class="character-name">${player2.Name}</h2>
     <img class="character-picture" src="${player2.characterIMG}" alt="">
     <p>${player2.Culture}</p>
-    <img src="img/token_player-2.svg" class="character-token" alt="token player2">
+    <img src="img/token_white_player2.png" class="character-token" alt="token player2">
     `
 
         document.getElementById('game-card-container').appendChild(characterCard)
@@ -144,6 +144,7 @@ function rollDice() {
     moveForward(diceRoll, playersTurnToRollDice, function(){
         if (diceRoll == 6) {
             alert('You rolled 6 on the dice, your turn again!')
+            canRollDice = true
             return
         }
     
